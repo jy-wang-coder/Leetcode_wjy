@@ -20,7 +20,7 @@ var longestPalindrome = function(s) {
         let r = i
         while ((l >=0) && (r<len) && s[l]===s[r]) {
             if ((r-l+1) > resLen){
-                res = s.slice(r,r+1)
+                res = s.slice(l,r+1)
                 resLen = r-l+1
             }
             l -= 1
@@ -31,7 +31,8 @@ var longestPalindrome = function(s) {
         let el = i
         let er = i+1
         while ((el >=0) && (er<len) && s[el]===s[er]) {
-            if ((er-el+1) > resLen){
+            if ((er-el+1
+                ) > resLen){
                 res = s.slice(el,er+1)
                 resLen = er-el+1
             }
@@ -42,7 +43,7 @@ var longestPalindrome = function(s) {
     return res
 };
 
-const s = "ccd"
+const s = "ccc"
 const str = longestPalindrome(s)
 console.log('The answer is')
 console.log(str)
