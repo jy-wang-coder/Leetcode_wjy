@@ -12,69 +12,34 @@
 
 var longestPalindrome = function(s) {
     let len = s.length
-    if (len === 1) {
-        return s
-    }
-    if (len ===2){
-        if (s[0]===s[1]){
-            return s
-        } else {
-            return s[0]
-        }
-    }
-    let maxlen = 0
-    let maxstr = ''
-
-    var findOddLongest = (j) => {
-        let l = j
-        let r = j
-        while (l >=1 && r <= len-2) {
-            if (s[l-1] === s[r+1]){
-                l -= 1
-                r +=1
-            } else {
-                break
+    let res = ""
+    let resLen = 0
+    for (let i = 0; i < len ; i++) {
+        // odd length
+        let l = i
+        let r = i
+        while ((l >=0) && (r<len) && s[l]===s[r]) {
+            if ((r-l+1) > resLen){
+                res = s.slice(r,r+1)
+                resLen = r-l+1
             }
+            l -= 1
+            r += 1
         }
-        return [l,r,r-l+1]
-    }
+        // even length 
 
-    var findEvenLongest = (j) => {
-        let l = j
-        let r = j+1
-        if (s[l] !== s[r]){
-            return [0,0,0]
-        }
-        while (l >=1 && r <= len-2) {
-            if (s[l-1] === s[r+1]){
-                l -= 1
-                r +=1
-            } else {
-                break
+        let el = i
+        let er = i+1
+        while ((el >=0) && (er<len) && s[el]===s[er]) {
+            if ((er-el+1) > resLen){
+                res = s.slice(er,er+1)
+                resLen = er-el+1
             }
-        }
-        return [l,r,r-l+1]
-    }
-
-
-
-    for (let j=1; j <= len-1 ; j++){
-        let tmp1 = findOddLongest(j)
-        if (tmp1[2] > maxlen){
-            maxstr = s.slice(tmp1[0] , tmp1[1]+1)
-            maxlen = Math.max(maxlen, tmp1[2])
+            el -= 1
+            er += 1
         }
     }
-
-    for (let j=0; j <= len-2 ; j++){
-        let tmp2 = findEvenLongest(j)
-        if (tmp2[2] > maxlen){
-            maxstr = s.slice(tmp2[0] , tmp2[1]+1)
-            maxlen = Math.max(maxlen, tmp2[2])
-        }
-    }
-
-    return maxstr
+    return res
 };
 
 const s = "ccd"
