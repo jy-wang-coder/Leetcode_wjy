@@ -32,7 +32,7 @@ var longestPalindrome = function(s) {
         let er = i+1
         while ((el >=0) && (er<len) && s[el]===s[er]) {
             if ((er-el+1) > resLen){
-                res = s.slice(er,er+1)
+                res = s.slice(el,er+1)
                 resLen = er-el+1
             }
             el -= 1
